@@ -23,10 +23,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Options extends JFrame implements ActionListener {
 	
-	JMenu file,effects;
+	JMenu file,effects,rgbcmy;
 	JMenuItem open,save,exit;
-	JMenuItem sepia, blackAndWhite, grayScale, wave, solarise, xRay, edge, posterization, oilPaint, outline, sharpen;
-	JMenuItem   redImage, blueImage, greenImage, emboss, invert, negative, mirror;
+	JMenuItem sepia, blackAndWhite, grayScale, wave, solarise, xRay, edge;
+	JMenuItem  emboss, original, negative, mirror, posterization, oilPaint, outline, sharpen;
+	JMenuItem red, blue, green, yellow, cyan,magenta;
 	JLabel label, newlabel;
 	JPanel imgpanel = new JPanel();
 	//JPanel newimgPanel = new JPanel();
@@ -45,10 +46,13 @@ public class Options extends JFrame implements ActionListener {
 		
 		file = new JMenu("File");
 		effects = new JMenu("Effect");
+		rgbcmy = new JMenu("RGBCMY");
 		m_bar1.add(file);
 		m_bar1.add(effects);
+		m_bar1.add(rgbcmy);
 		setJMenuBar(m_bar1);
 		
+		//File menu
 		open = new JMenuItem("Open");
 		save = new JMenuItem("Save");
 		exit = new JMenuItem("Exit");
@@ -59,7 +63,12 @@ public class Options extends JFrame implements ActionListener {
 		open.addActionListener(this);
 		save.addActionListener(this);
 		exit.addActionListener(this);
+
+		//original = new JMenuItem("Original");
+		//effects.add(original);
+		//original.addActionListener(this);
 		
+		// Filters menu
 		sepia = new JMenuItem("Sepia");
 		effects.add(sepia);
 		sepia.addActionListener(this);
@@ -81,7 +90,7 @@ public class Options extends JFrame implements ActionListener {
 		solarise.addActionListener(this);
 		
 		xRay = new JMenuItem("X-Ray");
-		//effects.add(xRay);
+		effects.add(xRay);
 		xRay.addActionListener(this);
 		
 		edge = new JMenuItem("Edge");
@@ -93,36 +102,20 @@ public class Options extends JFrame implements ActionListener {
 		oilPaint.addActionListener(this);
 		
 		outline = new JMenuItem("Outline");
-		//effects.add(outline);
+		effects.add(outline);
 		outline.addActionListener(this);
 		
 		sharpen = new JMenuItem("Sharpen");
-		//effects.add(sharpen);
+		effects.add(sharpen);
 		sharpen.addActionListener(this);
-		
-		redImage = new JMenuItem("RedImage");
-		effects.add(redImage);
-		redImage.addActionListener(this);
-		
-		blueImage = new JMenuItem("BlueImage");
-		effects.add(blueImage);
-		blueImage.addActionListener(this);
-		
-		greenImage = new JMenuItem("GreenImage");
-		effects.add(greenImage);
-		greenImage.addActionListener(this);
 		
 		posterization = new JMenuItem("Posterization");
 		effects.add(posterization);
 		posterization.addActionListener(this);
 		
 		emboss = new JMenuItem("Emboss");
-		//effects.add(emboss);
+		effects.add(emboss);
 		emboss.addActionListener(this);
-		
-		//invert = new JMenuItem("Invert");
-		//effects.add(invert);
-		//invert.addActionListener(this);
 		
 		negative = new JMenuItem("Negative");
 		effects.add(negative);
@@ -132,6 +125,31 @@ public class Options extends JFrame implements ActionListener {
 		effects.add(mirror);
 		mirror.addActionListener(this);
 		
+		
+		//RGBCMY menuitem
+		red = new JMenuItem("Red");
+		rgbcmy.add(red);
+		red.addActionListener(this);
+		
+		blue = new JMenuItem("Blue");
+		rgbcmy.add(blue);
+		blue.addActionListener(this);
+		
+		green = new JMenuItem("Green");
+		rgbcmy.add(green);
+		green.addActionListener(this);
+		
+		cyan = new JMenuItem("Cyan");
+		rgbcmy.add(cyan);
+		cyan.addActionListener(this);
+		
+		magenta = new JMenuItem("Magenta");
+		rgbcmy.add(magenta);
+		magenta.addActionListener(this);
+		
+		yellow = new JMenuItem("Yellow");
+		rgbcmy.add(yellow);
+		yellow.addActionListener(this);
 		
 		label = new JLabel();
 		imgpanel.add(label, BorderLayout.CENTER);
@@ -153,6 +171,7 @@ public class Options extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		JMenuItem compare = (JMenuItem) (e.getSource());
 		Effects effect = new Effects();
+		RGBCMY rgbcmy = new RGBCMY();
 		
 		if (compare.getText().compareTo("Open") == 0) {
 			setImage();
@@ -161,82 +180,126 @@ public class Options extends JFrame implements ActionListener {
 		else if (compare.getText().compareTo("Exit") == 0) {
 			System.exit(0);
 
-		} 
+		}
+		//else if (compare.getText().compareTo("Original") == 0) {
+		//	ReadImage();
+			//effect.Original(bimg);
+		//	DisplayImage();
+		//} 
+		else if (compare.getText().compareTo("Blue") == 0) {
+			ReadImage();
+			rgbcmy.Blue(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Green") == 0) {
+			ReadImage();
+			rgbcmy.Green(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Red") == 0) {
+			ReadImage();
+			rgbcmy.Red(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Cyan") == 0) {
+			ReadImage();
+			rgbcmy.Cyan(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Magenta") == 0) {
+			ReadImage();
+			rgbcmy.Magenta(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Yellow") == 0) {
+			ReadImage();
+			rgbcmy.Yellow(bimg);
+			DisplayImage2();
+		}
 		else if (compare.getText().compareTo("Sepia") == 0) {
+			ReadImage();
 			effect.Sepia(bimg);
 			DisplayImage2();
 		} 
 		else if (compare.getText().compareTo("GrayScale") == 0) {
+			ReadImage();
 			effect.GrayScale(bimg);
 			DisplayImage2();
 		} 
 		else if (compare.getText().compareTo("Wave") == 0) {
+			ReadImage();
 			effect.Wave(bimg);
 			DisplayImage2();
 		}
 		
 		else if (compare.getText().compareTo("Negative") == 0) {
+			ReadImage();
 			effect.Negative(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Black And White") == 0) {
+			ReadImage();
 			effect.BlackAndWhite(bimg);
 			DisplayImage2();
 		}
-		else if (compare.getText().compareTo("BlueImage") == 0) {
-			effect.Blue(bimg);
-			DisplayImage2();
-		}
-		else if (compare.getText().compareTo("GreenImage") == 0) {
-			effect.Green(bimg);
-			DisplayImage2();
-		}
-		else if (compare.getText().compareTo("RedImage") == 0) {
-			effect.Red(bimg);
-			DisplayImage2();
-		}
 		else if (compare.getText().compareTo("Posterization") == 0) {
+			ReadImage();
 			effect.Posterization(bimg);
 			DisplayImage2();
 		}
+		else if (compare.getText().compareTo("Emboss") == 0) {
+			ReadImage();
+			effect.Emboss(bimg);
+			DisplayImage2();
+		}
 		else if (compare.getText().compareTo("Mirror") == 0) {
+			ReadImage();
 			effect.Miror(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Solarise") == 0) {
+			ReadImage();
 			effect.Solarise(bimg);
 			DisplayImage2();
 		}
-		//else if (compare.getText().compareTo("Edge") == 0) {
-		//	effect.Edge(bimg);
-		//	DisplayImage2();
-		//}
+		else if (compare.getText().compareTo("X-Ray") == 0) {
+			ReadImage();
+			effect.XRay(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Edge") == 0) {
+			ReadImage();
+			//effect.Edge(bimg);
+			DisplayImage2();
+		}
 		
 	}
 	
 
 
-	// prepare and read image
+	// select image
 	public void setImage() {
 		// TODO Auto-generated method stub
 		int returnVal = openchooser.showOpenDialog(this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			filename = openchooser.getSelectedFile().getAbsolutePath();
-			try {
-				img = ImageIO.read(new File(filename));
-				bimg = ImageIO.read(new File(filename));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			
+			ReadImage();
 			DisplayImage();
 		} else {
 			JOptionPane.showMessageDialog(null, "please select image");
 		}
 	}
-
-
-
+	
+	//read image
+	public void ReadImage(){
+		filename = openchooser.getSelectedFile().getAbsolutePath();
+		try {
+			img = ImageIO.read(new File(filename));
+			bimg = ImageIO.read(new File(filename));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	//display original image
 	private void DisplayImage() {
 		

@@ -8,6 +8,19 @@ import javax.swing.JOptionPane;
 
 public class Effects {
 	
+	//public void Original(BufferedImage img) {
+		
+	//	int height = img.getHeight();
+	//	int width = img.getWidth();
+		
+	//	for(int y = 0; y < height; y++){
+	//	    for(int x =0; x <= width/2; x++){
+	//	    	int p = img.getRGB(x,y);
+		    	
+	//	    	img.setRGB(x, y,p);
+	//	    }
+	//	}
+	//}
 	public void Sepia(BufferedImage img) {
 		// TODO Auto-generated method stub
 		int height = img.getHeight();
@@ -123,68 +136,7 @@ public class Effects {
 		}
 	}
 
-	public void Blue(BufferedImage img) {
-		int height = img.getHeight();
-		int width = img.getWidth();
-		for(int y = 0; y < height; y++){
-		    for(int x = 0; x < width; x++){
-		    	
-		    	int p = img.getRGB(x,y);
-		    	int a = (p>>24)&0xff;
-		        int r = (p>>16)&0xff;
-		        int g = (p>>8)&0xff;
-		        int b = p&0xff;
-		        
-		        b=255;
-
-		        p = (a<<24) | (r<<16) | (g<<8) | b;
-		        img.setRGB(x, y, p);
-		    	
-		    }
-		}
-		
-	}
 	
-	public void Green(BufferedImage img) {
-		int height = img.getHeight();
-		int width = img.getWidth();
-		for(int y = 0; y < height; y++){
-		    for(int x = 0; x < width; x++){
-		    	
-		    	int p = img.getRGB(x,y);
-		    	int a = (p>>24)&0xff;
-		        int r = (p>>16)&0xff;
-		        int g = (p>>8)&0xff;
-		        int b = p&0xff;
-		        
-		        g=255;
-
-		        p = (a<<24) | (r<<16) | (g<<8) | b;
-		        img.setRGB(x, y, p);
-		    	
-		    }
-		}		
-	}
-
-	public void Red(BufferedImage img) {
-		int height = img.getHeight();
-		int width = img.getWidth();
-		for(int y = 0; y < height; y++){
-		    for(int x = 0; x < width; x++){
-		    	
-		    	int p = img.getRGB(x,y);
-		    	int a = (p>>24)&0xff;
-		        int r = (p>>16)&0xff;
-		        int g = (p>>8)&0xff;
-		        int b = p&0xff;
-		        
-		        r=255;
-
-		        p = (a<<24) | (r<<16) | (g<<8) | b;
-		        img.setRGB(x, y, p);	    	
-		    }
-		}	
-	}
 	
 	public void Posterization(BufferedImage img) {
 		
@@ -225,7 +177,7 @@ public class Effects {
 	public void Solarise(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();
-		int threshold = 127;
+		int threshold = 128;
 		for(int y = 0; y < height; y++){
 		    for(int x = 0; x < width; x++){
 		    	
@@ -235,9 +187,9 @@ public class Effects {
 		        int g = (p>>8)&0xff;
 		        int b = p&0xff;
 
-		        if(r <= threshold) r = 255-r;
-		        if(g <= threshold) g = 255-g;
-		        if(b <= threshold) b = 255-b;
+		        if(r <threshold) r = 255-r;
+		        if(g <threshold) g = 255-g;
+		        if(b <threshold) b = 255-b;
 		        
 		        p = (a<<24) | (r<<16) | (g<<8) | b;
 		        img.setRGB(x, y, p);
@@ -245,6 +197,7 @@ public class Effects {
 		}
 		
 	}
+	
 
 	public void Miror(BufferedImage img) {
 		int height = img.getHeight();
@@ -259,6 +212,7 @@ public class Effects {
 		    }
 		}
 	}
+	
 
 	public void Wave(BufferedImage img) {
 		
@@ -266,10 +220,12 @@ public class Effects {
 		int width = img.getWidth();
 		
 		for(int y = 0; y < height; y++){
-		    for(int x =0; x <= width/2 ; x++){
-		    	img.getRGB(x, y);
+		    for(int x =0; x <width ; x++){
+		    	
+		    	int p = img.getRGB(x, y);
 		    	int xx = x;
-                int yy = (int) (y + 20*Math.sin(x * 2 * Math.PI / 120));
+                int yy = (int) (y + 20*Math.sin(x* 2* Math.PI / 128));
+                
                 if (yy >= 0 && yy < height) {
                     img.setRGB(x, y, img.getRGB(xx, yy));
                 }
