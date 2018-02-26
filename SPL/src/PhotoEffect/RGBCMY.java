@@ -52,7 +52,6 @@ public class RGBCMY {
 	}
 
 	public void Red(BufferedImage img) {
-		int t=0;
 		int height = img.getHeight();
 		int width = img.getWidth();
 		for(int y = 0; y < height; y++){
@@ -64,12 +63,10 @@ public class RGBCMY {
 		        int g = (p>>8)&0xff;
 		        int b = p&0xff;
 		        
-		        r=0;
+		        //r=0;
 		        g=0;
 		        b=0;
 		        
-		        t++;
-
 		        p = (a<<24) | (r<<16) | (g<<8) | b;
 		        img.setRGB(x, y, p);	    	
 		    }
