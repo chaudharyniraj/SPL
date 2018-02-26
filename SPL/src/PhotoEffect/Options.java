@@ -249,7 +249,7 @@ public class Options extends JFrame implements ActionListener {
 		}
 		else if (compare.getText().compareTo("Emboss") == 0) {
 			ReadImage();
-			effect.Emboss(bimg);
+			//effect.Emboss(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Mirror") == 0) {
@@ -264,7 +264,7 @@ public class Options extends JFrame implements ActionListener {
 		}
 		else if (compare.getText().compareTo("X-Ray") == 0) {
 			ReadImage();
-			effect.XRay(bimg);
+			//effect.XRay(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Edge") == 0) {
