@@ -8,19 +8,6 @@ import javax.swing.JOptionPane;
 
 public class Effects {
 	
-	//public void Original(BufferedImage img) {
-		
-	//	int height = img.getHeight();
-	//	int width = img.getWidth();
-		
-	//	for(int y = 0; y < height; y++){
-	//	    for(int x =0; x <= width/2; x++){
-	//	    	int p = img.getRGB(x,y);
-		    	
-	//	    	img.setRGB(x, y,p);
-	//	    }
-	//	}
-	//}
 	public void Sepia(BufferedImage img) {
 		// TODO Auto-generated method stub
 		int height = img.getHeight();
@@ -198,6 +185,48 @@ public class Effects {
 		
 	}
 	
+	
+public void Edge(BufferedImage img) {
+		
+		int height = img.getHeight();
+		int width = img.getWidth();
+		int amount = 8;
+		
+		for(int y = 0; y < height-1; y++){
+		    for(int x =0; x <width-1 ; x++){
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		    	int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        int avg = (r+g+b)/3;
+		        
+		    	int buttomP = img.getRGB(x, y+1);
+		    	int buttomR = (buttomP>>16)&0xff;
+		        int buttomG = (buttomP>>8)&0xff;
+		        int buttomB = buttomP&0xff;
+		        int buttom_avg = (buttomR+buttomG+buttomB)/3;
+		        
+		        int rightP = img.getRGB(x+1, y);
+		        int rightR = (rightP>>16)&0xff;
+		        int rightG = (rightP>>8)&0xff;
+		        int rightB = rightP&0xff;
+		        int right_avg = (rightR+rightG+rightB)/3;
+		        
+		        if(Math.abs(avg-right_avg) < amount || Math.abs(avg-buttom_avg) < amount){
+		        	int red =0, blue=0, green =0;
+		        	p = (a<<24) | (red<<16) | (green<<8) | blue;
+		        	img.setRGB(x, y, p);
+		        }else{
+		        	int red =255, blue=255, green =255;
+		        	p = (a<<24) | (red<<16) | (green<<8) | blue;
+		        	img.setRGB(x, y, p);
+		        }
+		    }
+		}
+		
+	}
+
 
 	public void Miror(BufferedImage img) {
 		int height = img.getHeight();
@@ -212,26 +241,5 @@ public class Effects {
 		    }
 		}
 	}
-	
 
-	public void Wave(BufferedImage img) {
-		
-		int height = img.getHeight();
-		int width = img.getWidth();
-		
-		for(int y = 0; y < height; y++){
-		    for(int x =0; x <width ; x++){
-		    	
-		    	int p = img.getRGB(x, y);
-		    	int xx = x;
-                int yy = (int) (y + 20*Math.sin(x* 2* Math.PI / 128));
-                
-                if (yy >= 0 && yy < height) {
-                    img.setRGB(x, y, img.getRGB(xx, yy));
-                }
-		    }
-		}
-	}
-	
-	
 }

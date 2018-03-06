@@ -82,7 +82,7 @@ public class Options extends JFrame implements ActionListener {
 		grayScale.addActionListener(this);
 		
 		wave = new JMenuItem("Wave");
-		effects.add(wave);
+		//effects.add(wave);
 		wave.addActionListener(this);
 		
 		solarise = new JMenuItem("Solarise");
@@ -228,7 +228,7 @@ public class Options extends JFrame implements ActionListener {
 		} 
 		else if (compare.getText().compareTo("Wave") == 0) {
 			ReadImage();
-			effect.Wave(bimg);
+			//effect.Wave(bimg);
 			DisplayImage2();
 		}
 		
@@ -269,7 +269,7 @@ public class Options extends JFrame implements ActionListener {
 		}
 		else if (compare.getText().compareTo("Edge") == 0) {
 			ReadImage();
-			//effect.Edge(bimg);
+			effect.Edge(bimg);
 			DisplayImage2();
 		}
 		

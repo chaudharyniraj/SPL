@@ -86,20 +86,9 @@ public class RGBCMY {
 		        int g = (p>>8)&0xff;
 		        int b = p&0xff;
 		        
-		        int c = 1- (r/255);
-		        int m = 1- (g/255);
-		        int ye = 1- (b/255);
-		        
-		        int var_k = 1;
-		        
-		        if(c < var_k) var_k=c;
-		        
-		        if(var_k==1) c =0;
-		        else c=(c-var_k)/(1-var_k);
-		        
-		        //int k = var_k;
+		        r = 0;  // r= 0, g= 255, b=255
 
-		        p = (a<<24) | (c<<16) | (g<<8) | b;
+		        p = (a<<24) | (r<<16) | (g<<8) | b;
 		        img.setRGB(x, y, p);	    	
 		    }
 		}	
@@ -118,18 +107,9 @@ public class RGBCMY {
 		        int g = (p>>8)&0xff;
 		        int b = p&0xff;
 		        
-		        int c = 1- (r/255);
-		        int m = 1- (g/255);
-		        int ye = 1- (b/255);
-		        
-		        int var_k = 1;
-		        
-		        if(m < var_k) var_k=m;
-		        
-		        if(var_k==1) m =0;
-		        else m=(m-var_k)/(1-var_k);
+		        g =0;  // r= 255, g= 0, b=255
 
-		        p = (a<<24) | (r<<16) | (m<<8) | b;
+		        p = (a<<24) | (r<<16) | (g<<8) | b;
 		        img.setRGB(x, y, p);
 		        	    	
 		    }
@@ -150,18 +130,9 @@ public class RGBCMY {
 		        int g = (p>>8)&0xff;
 		        int b = p&0xff;
 		        
-		        int c = 1- (r/255);
-		        int m = 1- (g/255);
-		        int ye = 1- (b/255);
-		        
-		        int var_k = 1;
-		        
-		        if(m < var_k) var_k=ye;
-		        
-		        if(var_k==1) m =0;
-		        else ye=(ye-var_k)/(1-var_k);
+		        b=0; // r= 255, g= 255, b=0
 
-		        p = (a<<24) | (r<<16) | (g<<8) | ye;
+		        p = (a<<24) | (r<<16) | (g<<8) | b;
 		        img.setRGB(x, y, p);
 		    	
 		    }
