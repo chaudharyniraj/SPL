@@ -1,6 +1,7 @@
 package PhotoEffect;
 
 import java.awt.BorderLayout;
+import java.awt.Event;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -19,18 +20,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Options extends JFrame implements ActionListener {
 	
-	JMenu file,effects,rgbcmy;
+	JMenu file,effects,rgbcmy,rotation;
 	JMenuItem open,save,exit;
 	JMenuItem sepia, blackAndWhite, grayScale, wave, solarise, xRay, edge;
 	JMenuItem  emboss, original, negative, mirror, posterization, oilPaint, outline, sharpen;
 	JMenuItem red, blue, green, yellow, cyan,magenta;
+	JMenuItem rotate90, rotate180, rotate270;
 	JLabel label, newlabel;
 	JPanel imgpanel = new JPanel();
 	//JPanel newimgPanel = new JPanel();
+	JSlider sharpenSlider;
 	
 	JFileChooser openchooser = new JFileChooser("select your Image");
 	String filename = null;
@@ -47,9 +54,11 @@ public class Options extends JFrame implements ActionListener {
 		file = new JMenu("File");
 		effects = new JMenu("Effect");
 		rgbcmy = new JMenu("RGBCMY");
+		rotation = new JMenu("Rotation");
 		m_bar1.add(file);
 		m_bar1.add(effects);
 		m_bar1.add(rgbcmy);
+		m_bar1.add(rotation);
 		setJMenuBar(m_bar1);
 		
 		//File menu
@@ -151,6 +160,19 @@ public class Options extends JFrame implements ActionListener {
 		rgbcmy.add(yellow);
 		yellow.addActionListener(this);
 		
+		//Rotation
+		rotate90 = new JMenuItem("Rotate90");
+		rotation.add(rotate90);
+		rotate90.addActionListener(this);
+		
+		rotate180 = new JMenuItem("Rotate180");
+		rotation.add(rotate180);
+		rotate180.addActionListener(this);
+		
+		rotate270 = new JMenuItem("Rotate270");
+		rotation.add(rotate270);
+		rotate270.addActionListener(this);
+		
 		label = new JLabel();
 		imgpanel.add(label, BorderLayout.CENTER);
 		imgpanel.setLayout(new FlowLayout());
@@ -159,6 +181,9 @@ public class Options extends JFrame implements ActionListener {
 		newlabel = new JLabel();
 		imgpanel.add(newlabel, BorderLayout.CENTER);
 		add(imgpanel);
+		
+		JScrollPane png = new JScrollPane(imgpanel);
+		add(png);
 		
 		FileNameExtensionFilter openfilter = new FileNameExtensionFilter("Images", "jpg", "bmp");
 		openchooser.setFileFilter(openfilter);
@@ -172,6 +197,7 @@ public class Options extends JFrame implements ActionListener {
 		JMenuItem compare = (JMenuItem) (e.getSource());
 		Effects effect = new Effects();
 		RGBCMY rgbcmy = new RGBCMY();
+		Rotation rotation = new Rotation();
 		
 		if (compare.getText().compareTo("Open") == 0) {
 			setImage();
@@ -249,7 +275,7 @@ public class Options extends JFrame implements ActionListener {
 		}
 		else if (compare.getText().compareTo("Emboss") == 0) {
 			ReadImage();
-			//effect.Emboss(bimg);
+			effect.Emboss(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Mirror") == 0) {
@@ -271,6 +297,40 @@ public class Options extends JFrame implements ActionListener {
 			ReadImage();
 			effect.Edge(bimg);
 			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Sharpen") == 0) {
+			
+			ReadImage();
+			
+//			sharpenSlider = new JSlider(JSlider.HORIZONTAL, 0, 5, 0);
+//			add(sharpenSlider, BorderLayout.SOUTH);
+//			sharpenSlider.addChangeListener(new ChangeListener(){
+//
+//				@Override
+//				public void stateChanged(ChangeEvent arg0) {
+//					int value = sharpenSlider.getValue();
+//					System.out.println(value);
+//					effect.Sharpen(bimg,value);
+//				}				
+//			});
+			effect.Sharpen(bimg);
+			DisplayImage2();
+		}
+		
+		
+		
+		
+		
+		else if (compare.getText().compareTo("Rotate90") == 0) {
+			ReadImage();
+			int h = bimg.getHeight();
+			int w = bimg.getWidth();
+			BufferedImage rotated = new BufferedImage(h,w, bimg.getType());
+			rotation.Rotation90(bimg,rotated);
+			//rotation.Rotation90(bimg);
+			//DisplayImage2();
+			newlabel.setIcon(new ImageIcon(rotated));
+			//bimg=rotated;
 		}
 		
 	}

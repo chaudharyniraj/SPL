@@ -201,6 +201,7 @@ public void Edge(BufferedImage img) {
 		        int b = p&0xff;
 		        int avg = (r+g+b)/3;
 		        
+		        //getting neighbour pixel
 		    	int buttomP = img.getRGB(x, y+1);
 		    	int buttomR = (buttomP>>16)&0xff;
 		        int buttomG = (buttomP>>8)&0xff;
@@ -227,13 +228,43 @@ public void Edge(BufferedImage img) {
 		
 	}
 
+	public void Emboss(BufferedImage img) {
+		int height = img.getHeight();
+		int width = img.getWidth();
+		
+		for(int y = 0; y < height-1; y++){
+		    for(int x =0; x <width-1 ; x++){
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		    	int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        
+		        //getting neighbour pixel
+		    	int buttomP = img.getRGB(x+1, y+1);
+		    	int buttomR = (buttomP>>16)&0xff;
+		        int buttomG = (buttomP>>8)&0xff;
+		        int buttomB = buttomP&0xff;
+		        
+		        r = Math.min((Math.abs(r-buttomR)+128),255);
+		        g = Math.min((Math.abs(g-buttomG)+128),255);
+		        b = Math.min((Math.abs(b-buttomB)+128),255);
+		       
+		       	p = (a<<24) | (r<<16) | (g<<8) | b;
+		       	img.setRGB(x, y, p);
+		        
+		    }
+		}
+	
+	}
+
 
 	public void Miror(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();
 		
 		for(int y = 0; y < height; y++){
-		    for(int x =0; x <= width/2 ; x++){
+		    for(int x =0; x < width/2 ; x++){
 		    	int p = img.getRGB(x,y);
 		    	
 		    	img.setRGB(x, y, img.getRGB(width - 1 - x, y));
@@ -242,4 +273,46 @@ public void Edge(BufferedImage img) {
 		}
 	}
 
+	public void Sharpen(BufferedImage img) {
+		int height = img.getHeight();
+		int width = img.getWidth();
+		
+		String content = JOptionPane.showInputDialog("Write your value");
+		double value = Double.parseDouble(content);
+		if(value < 0.5) value = 0.5;
+		if(value > 10) value = 10;
+		
+		for(int y = 0; y < height-1; y++){
+		    for(int x =0; x <width-1 ; x++){
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		    	int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        
+		        //getting neighbour pixel
+		    	int buttomP = img.getRGB(x+1, y+1);
+		    	int buttomR = (buttomP>>16)&0xff;
+		        int buttomG = (buttomP>>8)&0xff;
+		        int buttomB = buttomP&0xff;
+		        
+		        r = (int) (r+(value*(r-buttomR)));
+		        g = (int) (g+(value*(g-buttomG)));
+		        b = (int) (b+(value*(b-buttomG)));
+		        
+		        if(r>255) r=255;
+		        if(r<0) r=0;
+		        if(g>255) g=255;
+		        if(g<0) g=0;
+		        if(b>255) b=255;
+		        if(b<0) b=0;
+		          
+		       	p = (a<<24) | (r<<16) | (g<<8) | b;
+		       	img.setRGB(x, y, p);
+		        
+		    }
+		}
+	}
+
+	
 }
