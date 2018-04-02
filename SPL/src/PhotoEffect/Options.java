@@ -31,7 +31,7 @@ public class Options extends JFrame implements ActionListener {
 	JMenu file,effects,rgbcmy,rotation;
 	JMenuItem open,save,exit;
 	JMenuItem sepia, blackAndWhite, grayScale, wave, solarise, xRay, edge;
-	JMenuItem  emboss, original, negative, mirror, posterization, oilPaint, outline, sharpen;
+	JMenuItem  emboss, original, negative, mirror, posterization, oilPaint, outline, sharpen, contrast;
 	JMenuItem red, blue, green, yellow, cyan,magenta;
 	JMenuItem rotate90, rotate180, rotate270;
 	JLabel label, newlabel;
@@ -114,9 +114,6 @@ public class Options extends JFrame implements ActionListener {
 		effects.add(outline);
 		outline.addActionListener(this);
 		
-		sharpen = new JMenuItem("Sharpen");
-		effects.add(sharpen);
-		sharpen.addActionListener(this);
 		
 		posterization = new JMenuItem("Posterization");
 		effects.add(posterization);
@@ -129,6 +126,14 @@ public class Options extends JFrame implements ActionListener {
 		negative = new JMenuItem("Negative");
 		effects.add(negative);
 		negative.addActionListener(this);
+		
+		sharpen = new JMenuItem("Sharpen");
+		effects.add(sharpen);
+		sharpen.addActionListener(this);
+		
+		contrast = new JMenuItem("Contrast");
+		effects.add(contrast);
+		contrast.addActionListener(this);
 		
 		mirror = new JMenuItem("Mirror");
 		effects.add(mirror);
@@ -276,6 +281,11 @@ public class Options extends JFrame implements ActionListener {
 		else if (compare.getText().compareTo("Emboss") == 0) {
 			ReadImage();
 			effect.Emboss(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Contrast") == 0) {
+			ReadImage();
+			effect.Contrast(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Mirror") == 0) {

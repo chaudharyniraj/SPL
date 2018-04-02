@@ -339,5 +339,27 @@ public void Edge(BufferedImage img) {
 		
 	}
 
+
+	public void Contrast(BufferedImage img) {
+		
+		int height = img.getHeight();
+		int width = img.getWidth();
+		
+		for(int y = 0; y < height-1; y++){
+		    for(int x =0; x <width-1 ; x++){
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		    	int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        
+		          
+		       	p = (a<<24) | (r<<16) | (g<<8) | b;
+		       	img.setRGB(x, y, p);
+		        
+		    }
+		}
+	}
+
 	
 }
