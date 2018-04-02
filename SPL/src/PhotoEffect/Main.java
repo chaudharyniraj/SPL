@@ -17,7 +17,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		JFrame frame = new JFrame();
-		ImageIcon img = new ImageIcon("C:\\Users\\niraj\\git\\SPL\\SPL\\flower.jpg");
+		ImageIcon img = new ImageIcon("C:\\Users\\niraj_007\\git\\SPL\\SPL\\flower.jpg");
 		JLabel label = new JLabel(img);
 		
 		JLabel msg = new JLabel("WELCOME TO PHOTO FILTER");

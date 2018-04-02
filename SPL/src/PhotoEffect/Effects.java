@@ -7,6 +7,37 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Effects {
+	//Emboss
+	public void Emboss(BufferedImage img) {
+		int height = img.getHeight();
+		int width = img.getWidth();
+		
+		for(int y = 0; y < height-1; y++){
+		    for(int x =0; x <width-1 ; x++){
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		    	int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        
+		        //getting neighbour pixel
+		    	int buttomP = img.getRGB(x+1, y+1);
+		    	int buttomR = (buttomP>>16)&0xff;
+		        int buttomG = (buttomP>>8)&0xff;
+		        int buttomB = buttomP&0xff;
+		        
+		        r = Math.min((Math.abs(r-buttomR)+128),255);
+		        g = Math.min((Math.abs(g-buttomG)+128),255);
+		        b = Math.min((Math.abs(b-buttomB)+128),255);
+		       
+		       	p = (a<<24) | (r<<16) | (g<<8) | b;
+		       	img.setRGB(x, y, p);
+		        
+		    }
+		}
+	
+	}
+
 	
 	public void Sepia(BufferedImage img) {
 		// TODO Auto-generated method stub
@@ -228,36 +259,6 @@ public void Edge(BufferedImage img) {
 		
 	}
 
-	public void Emboss(BufferedImage img) {
-		int height = img.getHeight();
-		int width = img.getWidth();
-		
-		for(int y = 0; y < height-1; y++){
-		    for(int x =0; x <width-1 ; x++){
-		    	int p = img.getRGB(x,y);
-		    	int a = (p>>24)&0xff;
-		    	int r = (p>>16)&0xff;
-		        int g = (p>>8)&0xff;
-		        int b = p&0xff;
-		        
-		        //getting neighbour pixel
-		    	int buttomP = img.getRGB(x+1, y+1);
-		    	int buttomR = (buttomP>>16)&0xff;
-		        int buttomG = (buttomP>>8)&0xff;
-		        int buttomB = buttomP&0xff;
-		        
-		        r = Math.min((Math.abs(r-buttomR)+128),255);
-		        g = Math.min((Math.abs(g-buttomG)+128),255);
-		        b = Math.min((Math.abs(b-buttomB)+128),255);
-		       
-		       	p = (a<<24) | (r<<16) | (g<<8) | b;
-		       	img.setRGB(x, y, p);
-		        
-		    }
-		}
-	
-	}
-
 
 	public void Miror(BufferedImage img) {
 		int height = img.getHeight();
@@ -312,6 +313,30 @@ public void Edge(BufferedImage img) {
 		        
 		    }
 		}
+	}
+
+
+	public void XRay(BufferedImage img) {
+		int height = img.getHeight();
+		int width = img.getWidth();
+		
+		for(int y = 0; y < height; y++){
+		    for(int x =0; x < width ; x++){
+		    	
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		        int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        
+		        int avg = (r+g+b)/3 ;
+		        int xray = 255-avg;
+
+		        p = (a<<24) | (xray<<16) | (xray<<8) | xray;
+		        img.setRGB(x, y, p);
+		    }
+		}
+		
 	}
 
 	

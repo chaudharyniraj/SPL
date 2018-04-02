@@ -290,7 +290,7 @@ public class Options extends JFrame implements ActionListener {
 		}
 		else if (compare.getText().compareTo("X-Ray") == 0) {
 			ReadImage();
-			//effect.XRay(bimg);
+			effect.XRay(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Edge") == 0) {
@@ -331,6 +331,12 @@ public class Options extends JFrame implements ActionListener {
 			//DisplayImage2();
 			newlabel.setIcon(new ImageIcon(rotated));
 			//bimg=rotated;
+		}
+		else if (compare.getText().compareTo("Rotate180") == 0) {
+			ReadImage();
+			//rotation.Rotation180(bimg);
+			//rotation.Rotation90(bimg);
+			DisplayImage2();
 		}
 		
 	}
