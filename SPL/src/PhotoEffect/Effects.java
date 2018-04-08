@@ -347,7 +347,7 @@ public void Edge(BufferedImage img) {
 		
 		String content = JOptionPane.showInputDialog("Write your value");
 		int value = Integer.parseInt(content);
-		if(value<-100) value = -100;
+		if(value<0) value = 0;
 		if(value>100) value = 100;
 		for(int y = 0; y < height-1; y++){
 		    for(int x =0; x <width-1 ; x++){
