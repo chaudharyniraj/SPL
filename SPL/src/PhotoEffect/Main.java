@@ -23,7 +23,7 @@ public class Main {
 		JLabel msg = new JLabel("WELCOME TO PHOTO FILTER");
 		msg.setBounds(100,200,800,35);
 		msg.setFont(new Font("Segoe Print", Font.BOLD, 40));
-		msg.setForeground(Color.LIGHT_GRAY);
+		msg.setForeground(Color.DARK_GRAY);
 		label.add(msg);
 		
 		JButton button = new JButton("Enter");

@@ -38,7 +38,50 @@ public class Effects {
 	
 	}
 
+	//////outline
+public void Outline(BufferedImage img) {
+		
+		int height = img.getHeight();
+		int width = img.getWidth();
+		int amount = 18;
+		
+		for(int y = 0; y < height-1; y++){
+		    for(int x =0; x <width-1 ; x++){
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		    	int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        int avg = (r+g+b)/3;
+		        
+		        //getting neighbour pixel
+		    	int buttomP = img.getRGB(x, y+1);
+		    	int buttomR = (buttomP>>16)&0xff;
+		        int buttomG = (buttomP>>8)&0xff;
+		        int buttomB = buttomP&0xff;
+		        int buttom_avg = (buttomR+buttomG+buttomB)/3;
+		        
+		        int rightP = img.getRGB(x+1, y);
+		        int rightR = (rightP>>16)&0xff;
+		        int rightG = (rightP>>8)&0xff;
+		        int rightB = rightP&0xff;
+		        int right_avg = (rightR+rightG+rightB)/3;
+		        
+		        if(Math.abs(avg-right_avg) > amount || Math.abs(avg-buttom_avg) > amount){
+		        	int red =0, blue=0, green =0;
+		        	p = (a<<24) | (red<<16) | (green<<8) | blue;
+		        	img.setRGB(x, y, p);
+		        }else{
+		        	int red =255, blue=255, green =255;
+		        	p = (a<<24) | (red<<16) | (green<<8) | blue;
+		        	img.setRGB(x, y, p);
+		        }
+		    }
+		}
+		
+	}
 	
+	//sepia
 	public void Sepia(BufferedImage img) {
 		// TODO Auto-generated method stub
 		int height = img.getHeight();

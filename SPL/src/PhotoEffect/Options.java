@@ -308,6 +308,11 @@ public class Options extends JFrame implements ActionListener {
 			effect.Edge(bimg);
 			DisplayImage2();
 		}
+		else if (compare.getText().compareTo("Outline") == 0) {
+			ReadImage();
+			effect.Outline(bimg);
+			DisplayImage2();
+		}
 		else if (compare.getText().compareTo("Sharpen") == 0) {
 			
 			ReadImage();
