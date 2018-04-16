@@ -316,7 +316,7 @@ public void Edge(BufferedImage img) {
 		    }
 		}
 	}
-
+///Sharpen
 	public void Sharpen(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();
@@ -357,8 +357,8 @@ public void Edge(BufferedImage img) {
 		    }
 		}
 	}
-
-
+	
+	//x-ray
 	public void XRay(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();
