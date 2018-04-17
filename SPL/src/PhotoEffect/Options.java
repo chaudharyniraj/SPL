@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -288,9 +289,26 @@ public class Options extends JFrame implements ActionListener {
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Contrast") == 0) {
+			
 			ReadImage();
-			effect.Contrast(bimg);
+			
+			sharpenSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+			add(sharpenSlider, BorderLayout.SOUTH);
+			sharpenSlider.addChangeListener(new ChangeListener(){
+				
+				@Override
+				
+				public void stateChanged(ChangeEvent arg0) {
+					sharpenSlider = (JSlider) arg0.getSource();
+					int value = (sharpenSlider.getValue());
+					System.out.println(value);
+					effect.Contrast(bimg,value);
+				}				
+			});
+			//effect.Contrast(bimg);
 			DisplayImage2();
+			repaint();
+			
 		}
 		else if (compare.getText().compareTo("Mirror") == 0) {
 			ReadImage();
@@ -325,20 +343,9 @@ public class Options extends JFrame implements ActionListener {
 		else if (compare.getText().compareTo("Sharpen") == 0) {
 			
 			ReadImage();
-			
-//			sharpenSlider = new JSlider(JSlider.HORIZONTAL, 0, 5, 0);
-//			add(sharpenSlider, BorderLayout.SOUTH);
-//			sharpenSlider.addChangeListener(new ChangeListener(){
-//
-//				@Override
-//				public void stateChanged(ChangeEvent arg0) {
-//					int value = sharpenSlider.getValue();
-//					System.out.println(value);
-//					effect.Sharpen(bimg,value);
-//				}				
-//			});
 			effect.Sharpen(bimg);
 			DisplayImage2();
+			
 		}
 		else if (compare.getText().compareTo("Rotate90") == 0) {
 			ReadImage();
@@ -348,6 +355,13 @@ public class Options extends JFrame implements ActionListener {
 		else if (compare.getText().compareTo("Rotate180") == 0) {
 			ReadImage();
 			rotation.Rotation180(bimg);
+			DisplayImage2();
+		}
+		else if (compare.getText().compareTo("Rotate270") == 0) {
+			ReadImage();
+			rotation.Rotation90(bimg);
+			rotation.Rotation90(bimg);
+			rotation.Rotation90(bimg);
 			DisplayImage2();
 		}
 		
