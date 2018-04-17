@@ -340,26 +340,14 @@ public class Options extends JFrame implements ActionListener {
 			effect.Sharpen(bimg);
 			DisplayImage2();
 		}
-		
-		
-		
-		
-		
 		else if (compare.getText().compareTo("Rotate90") == 0) {
 			ReadImage();
-			int h = bimg.getHeight();
-			int w = bimg.getWidth();
-			BufferedImage rotated = new BufferedImage(h,w, bimg.getType());
-			//rotation.Rotation90(bimg,rotated);
-			//rotation.Rotation90(bimg);
-			//DisplayImage2();
-			newlabel.setIcon(new ImageIcon(rotated));
-			//bimg=rotated;
+			rotation.Rotation90(bimg);
+			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Rotate180") == 0) {
 			ReadImage();
 			rotation.Rotation180(bimg);
-			//rotation.Rotation90(bimg);
 			DisplayImage2();
 		}
 		
