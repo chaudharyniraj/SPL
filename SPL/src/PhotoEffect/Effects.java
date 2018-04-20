@@ -334,6 +334,7 @@ public void Blur(BufferedImage img) {
 	        r = r / 9;
 	        g = g / 9;
 	        b = b / 9;
+	        
 	        p = (a<<24) | (r<<16) | (g<<8) | b;
 	       	img.setRGB(x, y, p);
 	    }
