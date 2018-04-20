@@ -1,5 +1,6 @@
 package PhotoEffect;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
@@ -198,7 +199,7 @@ public void Outline(BufferedImage img) {
 	}
 
 	
-	
+//////////////////////////////////////// Posterization /////////////////////////////////	
 	public void Posterization(BufferedImage img) {
 		
 		int height = img.getHeight();
@@ -259,7 +260,7 @@ public void Outline(BufferedImage img) {
 		
 	}
 	
-	
+////////////// Edge /////////////////////////////////////	
 public void Edge(BufferedImage img) {
 		
 		int height = img.getHeight();
@@ -302,7 +303,46 @@ public void Edge(BufferedImage img) {
 		
 	}
 
+//////////////////////////// Blur ///////////////////////////////////////////
+public void Blur(BufferedImage img) {
+	
+	int height = img.getHeight();
+	int width = img.getWidth();
+	
+	int[][] kernel = {	{1, 1, 1},
+            			{1, 1, 1},
+            			{1, 1, 1}
+	};
+	
+	for(int y = 1; y < height-1; y++){
+	    for(int x =1; x <width-1 ; x++){
+	    	
+	    	int p ;
+	    	int a = 0, r = 0, g = 0, b = 0;
+	        for (int j = -1; j <= 1; j++) {
+	            for (int i = -1; i <= 1; i++) {
+	 
+	            	p = img.getRGB(x+i,y+j);
+			    	a += kernel[1 + j][1 + i] * (p>>24)&0xff;
+			    	r += kernel[1 + j][1 + i] * (p>>16)&0xff;
+			        g += kernel[1 + j][1 + i] * (p>>8)&0xff;
+			        b += kernel[1 + j][1 + i] * p&0xff;
+	            	
+	            }
+	 
+	        }
+	        r = r / 9;
+	        g = g / 9;
+	        b = b / 9;
+	        p = (a<<24) | (r<<16) | (g<<8) | b;
+	       	img.setRGB(x, y, p);
+	    }
+	}
+	
+}
 
+
+/////////////////////////////// Mirror /////////////////////////////////////
 	public void Miror(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();
@@ -316,7 +356,7 @@ public void Edge(BufferedImage img) {
 		    }
 		}
 	}
-///Sharpen
+//////////////////////// Sharpen ///////////////////////////////////////////////////////
 	public void Sharpen(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();

@@ -296,18 +296,16 @@ public class Options extends JFrame implements ActionListener {
 			add(sharpenSlider, BorderLayout.SOUTH);
 			sharpenSlider.addChangeListener(new ChangeListener(){
 				
-				@Override
-				
 				public void stateChanged(ChangeEvent arg0) {
-					sharpenSlider = (JSlider) arg0.getSource();
 					int value = (sharpenSlider.getValue());
 					System.out.println(value);
 					effect.Contrast(bimg,value);
+					DisplayImage2();
+					repaint();
 				}				
 			});
 			//effect.Contrast(bimg);
-			DisplayImage2();
-			repaint();
+			
 			
 		}
 		else if (compare.getText().compareTo("Mirror") == 0) {
@@ -337,7 +335,7 @@ public class Options extends JFrame implements ActionListener {
 		}
 		else if (compare.getText().compareTo("Blur") == 0) {
 			ReadImage();
-			//effect.Blur(bimg);
+			effect.Blur(bimg);
 			DisplayImage2();
 		}
 		else if (compare.getText().compareTo("Sharpen") == 0) {
