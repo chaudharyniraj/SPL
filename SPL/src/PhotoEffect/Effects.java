@@ -362,10 +362,10 @@ public void Blur(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();
 		
-		String content = JOptionPane.showInputDialog("Write your value");
+		String content = JOptionPane.showInputDialog("Write your value(1-5)");
 		double value = Double.parseDouble(content);
-		if(value < 0.5) value = 0.5;
-		if(value > 10) value = 5;
+		if(value < 0) value = 0;
+		if(value > 2) value = 2;
 		
 		for(int y = 0; y < height-1; y++){
 		    for(int x =0; x <width-1 ; x++){
@@ -424,15 +424,15 @@ public void Blur(BufferedImage img) {
 	}
 
 
-	public void Contrast(BufferedImage img, int value) {
+	public void Contrast(BufferedImage img) {
 		
 		int height = img.getHeight();
 		int width = img.getWidth();
 		
-//		String content = JOptionPane.showInputDialog("Write your value");
-//		int value = Integer.parseInt(content);
-//		if(value<0) value = 0;
-//		if(value>100) value = 100;
+		String content = JOptionPane.showInputDialog("Write your value (1-100)");
+		int value = Integer.parseInt(content);
+		if(value<0) value = 0;
+		if(value>100) value = 100;
 		for(int y = 0; y < height-1; y++){
 		    for(int x =0; x <width-1 ; x++){
 		    	int p = img.getRGB(x,y);

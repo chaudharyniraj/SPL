@@ -32,7 +32,7 @@ public class Options extends JFrame implements ActionListener {
 	JMenu file,effects,rgbcmy,rotation;
 	JMenuItem open,save,exit;
 	JMenuItem sepia, blackAndWhite, grayScale, wave, solarise, xRay, edge,blur;
-	JMenuItem  emboss, original, negative, mirror, posterization, oilPaint, outline, sharpen, contrast;
+	JMenuItem  emboss, original, negative, mirror, posterization, outline, sharpen, contrast;
 	JMenuItem red, blue, green, yellow, cyan,magenta;
 	JMenuItem rotate90, rotate180, rotate270;
 	JLabel label, newlabel;
@@ -106,10 +106,6 @@ public class Options extends JFrame implements ActionListener {
 		edge = new JMenuItem("Edge");
 		effects.add(edge);
 		edge.addActionListener(this);
-		
-		oilPaint = new JMenuItem("Oil Paint");
-		//effects.add(oilPaint);
-		oilPaint.addActionListener(this);
 		
 		outline = new JMenuItem("Outline");
 		effects.add(outline);
@@ -292,20 +288,20 @@ public class Options extends JFrame implements ActionListener {
 			
 			ReadImage();
 			
-			sharpenSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-			add(sharpenSlider, BorderLayout.SOUTH);
-			sharpenSlider.addChangeListener(new ChangeListener(){
-				
-				public void stateChanged(ChangeEvent arg0) {
-					int value = (sharpenSlider.getValue());
-					System.out.println(value);
-					effect.Contrast(bimg,value);
-					DisplayImage2();
-					repaint();
-				}				
-			});
-			//effect.Contrast(bimg);
-			
+//			sharpenSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+//			add(sharpenSlider, BorderLayout.SOUTH);
+//			sharpenSlider.addChangeListener(new ChangeListener(){
+//				
+//				public void stateChanged(ChangeEvent arg0) {
+//					int value = (sharpenSlider.getValue());
+//					System.out.println(value);
+//					effect.Contrast(bimg,value);
+//					DisplayImage2();
+//					repaint();
+//				}				
+//			});
+			effect.Contrast(bimg);
+			DisplayImage2();
 			
 		}
 		else if (compare.getText().compareTo("Mirror") == 0) {
