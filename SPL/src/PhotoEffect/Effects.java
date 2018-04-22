@@ -362,7 +362,7 @@ public void Blur(BufferedImage img) {
 		int height = img.getHeight();
 		int width = img.getWidth();
 		
-		String content = JOptionPane.showInputDialog("Write your value(1-5)");
+		String content = JOptionPane.showInputDialog("Write your value(0-2)");
 		double value = Double.parseDouble(content);
 		if(value < 0) value = 0;
 		if(value > 2) value = 2;

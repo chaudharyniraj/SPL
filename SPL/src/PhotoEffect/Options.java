@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -41,6 +42,7 @@ public class Options extends JFrame implements ActionListener {
 	JSlider sharpenSlider;
 	
 	JFileChooser openchooser = new JFileChooser("select your Image");
+	JFileChooser savechooser = new JFileChooser("Save your Image here");
 	String filename = null;
 	
 	Image img;
@@ -209,6 +211,10 @@ public class Options extends JFrame implements ActionListener {
 			setImage();
 
 		} 
+		else if (compare.getText().compareTo("Save") == 0) {
+			saveImage();
+
+		}
 		else if (compare.getText().compareTo("Exit") == 0) {
 			System.exit(0);
 
@@ -395,6 +401,20 @@ public class Options extends JFrame implements ActionListener {
 	//display processed image
 	public void DisplayImage2(){
 		newlabel.setIcon(new ImageIcon(bimg));
+	}
+	
+	//SaveImage
+	public void saveImage() {
+		int save = savechooser.showSaveDialog(this);	
+		if (save == JFileChooser.APPROVE_OPTION) {
+			try {
+				ImageIO.write( (RenderedImage) bimg,"jpg",savechooser.getSelectedFile());		
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+						
+		} 
+					 
 	}
 
 
