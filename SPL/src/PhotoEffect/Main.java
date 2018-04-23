@@ -35,7 +35,7 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				JFrame mainframe = new Options();
 				mainframe.setTitle("Photo Filter");
-				mainframe.setSize(800,500);		
+				mainframe.setSize(1200,700);		
 				mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 				mainframe.setVisible(true);
 				frame.setVisible(false);
