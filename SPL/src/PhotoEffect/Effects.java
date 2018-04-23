@@ -357,6 +357,22 @@ public void Blur(BufferedImage img) {
 		    }
 		}
 	}
+	
+	//////////////////////////// vertical flip /////////////////////////////////////
+	public void Vertical_Flip(BufferedImage img) {
+		int height = img.getHeight();
+		int width = img.getWidth();
+		
+		for(int y = 0; y < height/2; y++){
+		    for(int x =0; x < width ; x++){
+		    	int p = img.getRGB(x,y);
+		    	
+		    	img.setRGB(x, y, img.getRGB(x,height-1- y));
+                img.setRGB(x,height-1- y, p);
+		    }
+		}
+	}
+	
 //////////////////////// Sharpen ///////////////////////////////////////////////////////
 	public void Sharpen(BufferedImage img, double value) {
 		int height = img.getHeight();

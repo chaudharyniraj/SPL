@@ -35,7 +35,7 @@ public class Options extends JFrame implements ActionListener {
 	
 	JButton open,save,exit;
 	JButton sepia, blackAndWhite, grayScale, wave, solarise, xRay,blur;
-	JButton  emboss, original, negative, mirror, posterization,edge, edge2;
+	JButton  emboss, original, negative, mirror,v_flip, posterization,edge, edge2;
 	JButton red, blue, green, yellow, cyan,magenta;
 	JButton rotate90, rotate180, rotate270;
 	JLabel label, newlabel;
@@ -146,6 +146,10 @@ public class Options extends JFrame implements ActionListener {
 		effects.add(mirror);
 		mirror.addActionListener(this);
 		
+		v_flip = new JButton("Vertical Flip");
+		effects.add(v_flip);
+		v_flip.addActionListener(this);
+		
 		
 		//RGBCMY 
 		red = new JButton("Red");
@@ -175,7 +179,7 @@ public class Options extends JFrame implements ActionListener {
 		/////////// Filters panel //////
 		add(effects,BorderLayout.WEST);
 		effects.setPreferredSize(new Dimension(130,0));
-		effects.setLayout(new GridLayout(18,1));
+		effects.setLayout(new GridLayout(19,1));
 		
 		////////////// image pannel ///////////////////////
 		label = new JLabel();
@@ -218,8 +222,8 @@ public class Options extends JFrame implements ActionListener {
 		sharpenSlider.addChangeListener(new ChangeListener(){
 			Effects effect = new Effects();
 			public void stateChanged(ChangeEvent arg0) {
-				double value = (sharpenSlider.getValue())/100;
-				System.out.println(sharpenSlider.getValue()/100);
+				double value = (sharpenSlider.getValue())/100.0;
+				//System.out.println(value);
 				ReadImage();
 				effect.Sharpen(bimg,value);
 				DisplayImage2();
@@ -346,6 +350,11 @@ public class Options extends JFrame implements ActionListener {
 		else if (compare1.equals("Mirror")) {
 			ReadImage();
 			effect.Miror(bimg);
+			DisplayImage2();
+		}
+		else if (compare1.equals("Vertical Flip")) {
+			ReadImage();
+			effect.Vertical_Flip(bimg);
 			DisplayImage2();
 		}
 		else if (compare1.equals("Solarise")) {
