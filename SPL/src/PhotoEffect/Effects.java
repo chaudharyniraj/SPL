@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Effects {
+	private static final String MathUtils = null;
+
+
 	//Emboss
 	public void Emboss(BufferedImage img) {
 		int height = img.getHeight();
@@ -477,6 +480,39 @@ public void Blur(BufferedImage img) {
 		        
 		    }
 		}
+	}
+
+	public void Brightness(BufferedImage img, int value) {
+		
+		int height = img.getHeight();
+		int width = img.getWidth();
+		
+		for(int y = 0; y < height-1; y++){
+		    for(int x =0; x <width-1 ; x++){
+		    	int p = img.getRGB(x,y);
+		    	int a = (p>>24)&0xff;
+		    	int r = (p>>16)&0xff;
+		        int g = (p>>8)&0xff;
+		        int b = p&0xff;
+		        
+		        r = r + value;
+		        g = g + value;
+		        b = b + value;
+                if(r > 255) r = 255;
+                else if(r<0) r = 0;
+                
+                if(g > 255) g = 255;
+                else if(g < 0) g = 0;
+                
+                if(b > 255) b = 255;
+                else if(b < 0) b = 0;
+		          
+		       	p = (a<<24) | (r<<16) | (g<<8) | b;
+		       	img.setRGB(x, y, p);
+		        
+		    }
+		}
+
 	}
 
 	

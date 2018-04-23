@@ -43,7 +43,7 @@ public class Options extends JFrame implements ActionListener {
 	JPanel effects = new JPanel();
 	JPanel north = new JPanel();
 	JPanel south = new JPanel();
-	JSlider sharpenSlider, contrastSlider;
+	JSlider sharpenSlider, contrastSlider, brightnessSlider;
 	
 	JFileChooser openchooser = new JFileChooser("select your Image");
 	JFileChooser savechooser = new JFileChooser("Save your Image here");
@@ -199,7 +199,7 @@ public class Options extends JFrame implements ActionListener {
 		//////////////// Slider Contrast ///////////////////////////
 		JLabel contrast = new JLabel("Contrast");
 		south.add(contrast);		
-		contrastSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+		contrastSlider = new JSlider(JSlider.HORIZONTAL, -50, 100, 0);
 		//add(contrastSlider, BorderLayout.SOUTH);
 		contrastSlider.addChangeListener(new ChangeListener(){
 			Effects effect = new Effects();
@@ -213,6 +213,24 @@ public class Options extends JFrame implements ActionListener {
 			}				
 		});
 		south.add(contrastSlider);
+		
+		////////////////Slider Brightness ///////////////////////////
+		JLabel brightness = new JLabel("Brightness");
+		south.add(brightness);		
+		brightnessSlider = new JSlider(JSlider.HORIZONTAL, -100, 100, 0);
+		//add(contrastSlider, BorderLayout.SOUTH);
+		brightnessSlider.addChangeListener(new ChangeListener(){
+			Effects effect = new Effects();
+			public void stateChanged(ChangeEvent arg0) {
+				int value = (brightnessSlider.getValue());
+				
+				ReadImage();
+				effect.Brightness(bimg,value);
+				DisplayImage2();
+				repaint();
+			}				
+		});
+		south.add(brightnessSlider);
 		
 		////// sharpen Slider//////////////////
 		JLabel sharpen = new JLabel("Sharpen");
@@ -267,19 +285,26 @@ public class Options extends JFrame implements ActionListener {
 		else if (compare1.equals("Rotate90")) {
 			ReadImage();
 			rotation.Rotation90(bimg);
-			DisplayImage2();
+			//DisplayImage2();
+			newlabel.setIcon(new ImageIcon(rotation.rotated));
+			bimg=rotation.rotated;			
 		}
 		else if (compare1.equals("Rotate180")) {
 			ReadImage();
-			rotation.Rotation180(bimg);
-			DisplayImage2();
+			rotation.Rotation90(bimg);
+			rotation.Rotation90(rotation.rotated);
+			//DisplayImage2();
+			newlabel.setIcon(new ImageIcon(rotation.rotated));
+			bimg=rotation.rotated;
 		}
 		else if (compare1.equals("Rotate270")) {
 			ReadImage();
 			rotation.Rotation90(bimg);
-			rotation.Rotation90(bimg);
-			rotation.Rotation90(bimg);
-			DisplayImage2();
+			rotation.Rotation90(rotation.rotated);
+			rotation.Rotation90(rotation.rotated);
+			//DisplayImage2();
+			newlabel.setIcon(new ImageIcon(rotation.rotated));
+			bimg=rotation.rotated;
 		}
 		else if (compare1.equals("Blue")) {
 			ReadImage();
@@ -395,6 +420,7 @@ public class Options extends JFrame implements ActionListener {
 			
 			ReadImage();
 			DisplayImage();
+			DisplayImage2();
 		} else {
 			JOptionPane.showMessageDialog(null, "please select image");
 		}
