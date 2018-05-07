@@ -47,7 +47,5 @@ public class Main {
 		frame.setSize(900, 600);
 		frame.setResizable(false);
 		frame.setVisible(true);
-
 	}
-
 }
