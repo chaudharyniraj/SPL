@@ -396,7 +396,7 @@ public void Blur(BufferedImage img) {
 		        
 		        r = (int) (r+(value*(r-buttomR)));
 		        g = (int) (g+(value*(g-buttomG)));
-		        b = (int) (b+(value*(b-buttomG)));
+		        b = (int) (b+(value*(b-buttomB)));
 		        
 		        if(r>255) r=255;
 		        if(r<0) r=0;
